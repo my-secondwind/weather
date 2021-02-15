@@ -23,7 +23,7 @@ public class CloudinessInfoServiceImpl implements CloudinessInfoService {
     }
 
     @Override
-    public CloudinessInfo get() {
+    public CloudinessInfo getStatistic() {
         WeatherItem weatherItem = weatherService.getWeatherItem();
         CloudinessInfo cloudinessInfo = computeCloudinessInfo(weatherItem);
         cloudinessInfoRepository.save(cloudinessInfo);
@@ -37,7 +37,8 @@ public class CloudinessInfoServiceImpl implements CloudinessInfoService {
         cloudinessInfoBuilder.setStartDate(forecasts.get(0).getDate())
                 .setEndDate(forecasts.get(forecasts.size() - 1).getDate());
 
-        List<Double> cloudinessList = forecasts.stream().map(it -> it.getDayParts().getDay().getCloudiness()).collect(Collectors.toList());
+        List<Double> cloudinessList = forecasts.stream().map(
+                it -> it.getDayParts().getDay().getCloudiness()).collect(Collectors.toList());
         cloudinessInfoBuilder.setClearDay((int) cloudinessList.stream().filter(it -> it == 0).count())
                 .setSlightlyCloudyDay((int) cloudinessList.stream().filter(it -> (it > 0 && it <= 0.25)).count())
                 .setCloudyDay((int) cloudinessList.stream().filter(it -> (it > 0.25 && it < 1)).count())

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class WeatherServiceImpl implements WeatherService {
+public class WeatherServiceYandex implements WeatherService {
 
     public static final String RESOURCE_URL = "https://api.weather.yandex.ru/v2/forecast?lat=52.43&lon=41.27";
     public static final String YANDEX_API_KEY_HEADER = "X-Yandex-API-Key";

@@ -17,7 +17,7 @@ public class CloudinessInfoController {
 
     @GetMapping("/cloudiness")
     public ResponseEntity<CloudinessInfo> getCloudinessInfo() {
-        CloudinessInfo cloudinessInfo = cloudinessInfoService.get();
+        CloudinessInfo cloudinessInfo = cloudinessInfoService.getStatistic();
         return cloudinessInfo != null
                 ? new ResponseEntity<>(cloudinessInfo, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
